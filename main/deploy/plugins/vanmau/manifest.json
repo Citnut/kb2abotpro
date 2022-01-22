@@ -1,0 +1,15 @@
+{
+  "manifest_version": 1,
+  "name": "VANMAU",
+  "version": "1.0",
+  "authorDetails": {
+    "name": "duongdzin",
+    "contact": "fb.com/duongdzin"
+  },
+  "entry": "index.js",
+  "disable": false,
+  "update": {
+    "manifest": "",
+    "plugin": ""
+  }
+}
