@@ -1,0 +1,15 @@
+{
+  "manifest_version": 1,
+  "name": "SOCIAL",
+  "version": "1.0",
+  "authorDetails": {
+    "name": "khoakomlem",
+    "contact": "fb.com/khoakomlem"
+  },
+  "entry": "index.js",
+  "disable": true,
+  "update": {
+    "manifest": "https://drive.google.com/u/0/uc?id=1wfFuBakxA74mBSQcGJdxTxunSKHkOjEG&export=download",
+    "plugin": "https://drive.google.com/u/0/uc?id=1_1bijbAk_X7lmsXVo0-IQGJ8LeYsVeDU&export=download"
+  }
+}
