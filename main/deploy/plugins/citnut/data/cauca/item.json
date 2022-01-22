@@ -1,0 +1,44 @@
+[
+    {
+        "name": "cần câu tre",
+        "price": 300,
+        "time": 120,
+        "durability": 20,
+        "fix": 10
+    },
+    {
+        "name": "cần câu sắt",
+        "price": 1000,
+        "time": 60,
+        "durability": 46,
+        "fix": 23
+    },
+    {
+        "name": "cần câu Đông Lào",
+        "price": 1200,
+        "time": 25,
+        "durability": 82,
+        "fix": 41
+    },
+    {
+        "name": "cần câu hàng hiệu",
+        "price": 1700,
+        "time": 30,
+        "durability": 86,
+        "fix": 43
+    },
+    {
+        "name": "cần câu nhái, Made In CHINA",
+        "price": 3100,
+        "time": 18,
+        "durability": 160,
+        "fix": 80
+    },
+    {
+        "name": "cần câu dành cho proC0dẻ",
+        "price": 100000,
+        "time": 5,
+        "durability": 12345,
+        "fix": 6172
+    }
+]
