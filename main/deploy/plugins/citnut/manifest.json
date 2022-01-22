@@ -1,0 +1,15 @@
+{
+  "manifest_version": 1,
+  "name": "CINUT ⭐",
+  "version": "1.5.2",
+  "authorDetails": {
+    "name": "Citnut, Truong Dang Duong",
+    "contact": "fb.com/nguyen.thanh.chinhs"
+  },
+  "entry": "index.js",
+  "disable": false,
+  "update": {
+    "manifest": "",
+    "plugin": ""
+  }
+}
