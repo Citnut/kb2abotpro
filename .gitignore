@@ -11,4 +11,4 @@ main/deploy/updates/*
 node_modules/
 packagehash.txt
 test.js
-CONFIG.js
+!main/deploy/CONFIG.js
