@@ -4,7 +4,7 @@ const axios = require('axios');
 const moment = require("moment-timezone");
 const fetch = require("node-fetch");
 const streamBuffers = require("stream-buffers");
-const { adname, arr } = require("./func.js");
+const { adname } = require("./func.js");
 const mainpack = require("../../../../package.json");
 
 function byte2mb(bytes) {
@@ -44,7 +44,7 @@ module.exports = {
 			prefix = this.storage.thread.global.prefix,
 			time = process.uptime(),
 			day = Math.floor(time/(60*60*24)),
-			hours = Math.floor(time / (60 * 60)),
+			hours = Math.floor((time / (60 * 60)) - (day*24)),
 			minutes = Math.floor((time % (60 * 60)) / 60),
 			seconds = Math.floor(time % 60),
 			timeStart = Date.now(),
@@ -54,11 +54,10 @@ module.exports = {
 		try {
 			let r = await fetch(res.data.url),
 				buf = await r.buffer(),
-				img = new streamBuffers.ReadableStreamBuffer({frequency: 10, chunkSize: 1024}),
-				talk = arr[Math.floor(Math.random() * parseInt(arr.length))];
+				img = new streamBuffers.ReadableStreamBuffer({frequency: 10, chunkSize: 1024});
 				img.path = "wibu.jpg", img.put(buf), img.stop();
 			fca.sendMessage({
-				body: `Hiện tại đang là: ${gio} và bot của ${adname} đã hoạt động được ${day} ngày ${hours} giờ ${minutes} phút ${seconds} giây.\n🐳Bot: ${mainpack.name}\n🐳Prefix: ${prefix}\n🐳Version: ${mainpack.version}\n🐳Cpu đang sử dụng: ${cpuuu.cpu.toFixed(1)}\n🐳Ram đang sử dụng: ${byte2mb(cpuuu.memory)}\n🐳Ping: ${Date.now() - timeStart}ms\n💬💬💬\n${talk}`,
+				body: `Hiện tại đang là: ${gio} và bot của ${adname} đã hoạt động được ${day} ngày ${hours} giờ ${minutes} phút ${seconds} giây.\n🐳Bot: ${mainpack.name}\n🐳Prefix: ${prefix}\n🐳Version: ${mainpack.version}\n🐳Cpu đang sử dụng: ${cpuuu.cpu.toFixed(1)}\n🐳Ram đang sử dụng: ${byte2mb(cpuuu.memory)}\n🐳Ping: ${Date.now() - timeStart}ms`,
 				attachment: img
 			}, message.threadID, message.messageID)
 		}catch (e) {

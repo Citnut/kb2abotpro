@@ -13,12 +13,7 @@ const adname = `Nguyễn Thanh Chính`;
 
 module.exports = {
 	adname,
-	arr: ["có lòng trồng hoa, hoa không nở. Vô tình chùi đít, đít nở hoa", "sợ đầu em sưng, anh không cắm sừng em đâu", "Muốn bắt cọp thì vào sở thú, muốn tìm chỗ trú thì vào tim em."
-	, "sóng bắt đầu từ gió, gió bắt đầu từ đâu? Anh cũng không biết nữa, hay là ta yêu nhau", "Muốn mặn thì ăn muối còn muốn đắm đuối thì theo em.", "Nghe nói anh đang tìm cô gái tốt, giật mình chạy trốn vì sợ anh theo!"
-	, "Quanh năm phê cỏ phê cần không bằng những lúc được gần bên em.", " Cần sa em không thích vì chất kích thích đã là anh.", "Anh ơi em thích đồng hồ thích luôn cả việc làm bồ của anh."
-	, "Nhân gian vốn lắm bộn bề sao không bỏ hết rồi về bên nhau.", "Màu anh thích là màu xanh dương, còn em mãi là người anh thương.", "bầu trời is blue, lông cu is black, lông nách is brown. Lạy chúa trên cao, cặc lao và đít"
-	, "Tui đang ở tuổi cập kê sao cậu cứ khiến tui mê cậu hoài.", "Dăm ba cây kẹo mút sao có sức hút bằng em.", "Yêu là phải nói cũng như đói là phải ăn!", "Muốn bình yên thì lên chùa cầu phúc, còn muốn hạnh phúc thì về bên anh."
-	],
+	
 	async calendar () {
 		let res = await axios.get(`https://api.vangbanlanhat.tk/other?type=calendar`);
 		return res.data.data
