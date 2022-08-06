@@ -46,7 +46,7 @@ module.exports = {
 		if (!storage.eco[message.senderID].money) { storage.eco[message.senderID].money = 0 };
 		if (message.type != 'message_reply') return;
 		if (message.messageReply.senderID != storage.botId) return;
-		let id = arg = tinnhan = '';
+		let id, arg, tinnhan = ''
 		
 		async function bxh () {
 			try {
