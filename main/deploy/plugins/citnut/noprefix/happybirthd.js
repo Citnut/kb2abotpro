@@ -31,8 +31,8 @@ module.exports = {
 
 	async onMessage(message, reply) {
 		let setting = this.storage.account.global.citSetting;
-		if (setting.autorun != true || message.senderID == this.storage.account.global.console.bot.id) {
-		}else if (message.body.toLowerCase().indexOf("cmsn") == 0 || message.body.toLowerCase().indexOf("snvv") == 0) {
+		if (setting.autorun != true || message.senderID == this.storage.account.global.botId) {
+		}else if (message.body.toLowerCase().startsWith("cmsn") || message.body.toLowerCase().startsWith("snvv")) {
 			fca.sendMessage({
 				body: "Happy Birthday To You 😽 😽 😽",
 				attachment: getFile("./main/deploy/plugins/citnut/data/noprefix/cmsn.mp4")

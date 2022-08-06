@@ -31,8 +31,8 @@ module.exports = {
 
 	async onMessage(message, reply) {
 		let setting = this.storage.account.global.citSetting;
-		if (setting.autorun != true || message.senderID == this.storage.account.global.console.bot.id) {
-		}else if (message.body.toLowerCase().indexOf("bot ngu") == 0 || message.body.toLowerCase().indexOf("bot cc") == 0) {
+		if (setting.autorun != true || message.senderID == this.storage.account.global.botId) {
+		}else if (message.body.toLowerCase().startsWith("bot ngu")) {
 			fca.sendMessage({
 				body: "bot là siêu vip, là số 1 ok!",
 				attachment: getFile("./main/deploy/plugins/citnut/data/noprefix/botngu.jpg")

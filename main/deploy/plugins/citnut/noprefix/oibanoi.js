@@ -31,8 +31,8 @@ module.exports = {
 
 	async onMessage(message, reply) {
 		let setting = this.storage.account.global.citSetting;
-		if (setting.autorun != true || message.senderID == this.storage.account.global.console.bot.id) {
-		}else if (message.body.toLowerCase().includes("bạn ơi")) {
+		if (setting.autorun != true || message.senderID == this.storage.account.global.botId) {
+		}else if (message.body.toLowerCase().startsWith("bạn ơi")) {
 			if (message.type == "message_reply" && message.messageReply.body == "ôi bạn ơi...") return;
 			fca.sendMessage({
 				body: "ôi bạn ơi...",

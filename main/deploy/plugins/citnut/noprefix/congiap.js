@@ -26,7 +26,7 @@ module.exports = {
 		//let message = await handleReply(message);
 
 		if (!setting.run.congiap) return reply("lệnh này đã bị tắt");
-		if (message.messageReply.body == citnut && message.messageReply.senderID == this.storage.account.global.console.bot.id) {
+		if (message.messageReply.body == citnut && message.messageReply.senderID == this.storage.account.global.botId) {
 			switch(message.body){
 				case "1":
 					fca.sendMessage({
@@ -107,7 +107,7 @@ module.exports = {
 			asyncWait(10000).then(() => {fca.unsendMessage(message.messageReply.messageID)})
 		};
 
-		if (setting.autorun != true || message.senderID == this.storage.account.global.console.bot.id) {
+		if (setting.autorun != true || message.senderID == this.storage.account.global.botId) {
 		}else if (message.body.toLowerCase().indexOf("12 con giáp") == 0 || (message.body.toLowerCase().indexOf("12 con giap") == 0)) {
 			fca.sendMessage({
 				body: citnut,

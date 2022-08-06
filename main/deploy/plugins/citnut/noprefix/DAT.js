@@ -33,7 +33,7 @@ module.exports = {
 
 	async onMessage(message, reply) {
 		let setting = this.storage.account.global.citSetting;
-		if (setting.autorun != true || message.senderID == this.storage.account.global.console.bot.id) {
+		if (setting.autorun != true || message.senderID == this.storage.account.global.botId) {
 		}else if (message.body.toLowerCase().indexOf("đạt") == 0) {
 			fca.sendMessage({attachment: att[Math.floor(Math.random() * parseInt(att.length))]}, message.threadID, message.messageID)
 		}

@@ -31,8 +31,8 @@ module.exports = {
 
 	async onMessage(message, reply) {
 		let setting = this.storage.account.global.citSetting;
-		if (setting.autorun != true || message.senderID == this.storage.account.global.console.bot.id) {
-		}else if (message.body.toLowerCase().includes("bạn là nhất")) {
+		if (setting.autorun != true || message.senderID == this.storage.account.global.botId) {
+		}else if (message.body.toLowerCase().startsWith("bạn là nhất")) {
 			fca.sendMessage({
 				body: "vâng bạn là nhất?",
 				attachment: getFile("./main/deploy/plugins/citnut/data/noprefix/banlanhat.mp4")

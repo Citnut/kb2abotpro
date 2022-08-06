@@ -33,8 +33,8 @@ module.exports = {
 
 	async onMessage(message, reply) {
 		let setting = this.storage.account.global.citSetting;
-		if (setting.autorun != true || message.senderID == this.storage.account.global.console.bot.id) {
-		}else if ((message.body.toLowerCase()).indexOf("ảo") == 0) {
+		if (setting.autorun != true || message.senderID == this.storage.account.global.botId) {
+		}else if ((message.body.toLowerCase()).startsWith("ảo")) {
 			fca.sendMessage({
 				body: "Djtconmemay ảo con mẹ mày suốt ngày ảo 🙃",
 				attachment: getFile("./main/deploy/plugins/citnut/data/noprefix/aothatday.mp3")

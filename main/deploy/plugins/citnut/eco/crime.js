@@ -1,14 +1,13 @@
 const { random, round } = kb2abot.helpers;
 //const setting = require("../setting.json");
-const axios = require("axios");
+const axios = require('axios');
 
 module.exports = {
-	
-	name: "ăn chộm ăn cắp",
-	keywords:["crime"],
-	description: "tiền tiền tiền",
-	guide: "",
-	hookType: "*",
+	name: 'ăn chộm ăn cắp',
+	keywords:['crime'],
+	description: 'tiền tiền tiền',
+	guide: '',
+	hookType: '*',
 	childs: [],
 
 	permission: {
@@ -51,14 +50,14 @@ module.exports = {
 	async onCall(message, reply) {
 		let setting = this.storage.account.global.citSetting;
 		if (setting.run.crime != true) {
-			return reply("plugin này đã bị tắt")
+			return reply('plugin này đã bị tắt')
 		}else {
 
 			let storage = this.storage.account.global;
 			let crime = storage.cooldown.crime;
 
 			const time = new Date;
-			const res = await axios.get(`https://raw.githubusercontent.com/Citnut/Citnut/main/KB2ABotECOConfig.json`);
+			const res = await axios.get('https://raw.githubusercontent.com/Citnut/Citnut/main/KB2ABotECOConfig.json');
 
 			const data = res.data;
 			if (time.getTime() < crime[message.senderID] + (data.cooldown.crime * 1000)) {

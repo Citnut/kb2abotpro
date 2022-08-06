@@ -31,8 +31,8 @@ module.exports = {
 
 	async onMessage(message, reply) {
 		let setting = this.storage.account.global.citSetting;
-		if (setting.autorun != true || message.senderID == this.storage.account.global.console.bot.id) {
-		}else if (message.body.toLowerCase().includes("vĩnh biệt")) {
+		if (setting.autorun != true || message.senderID == this.storage.account.global.botId) {
+		}else if (message.body.toLowerCase().startsWith("vĩnh biệt")) {
 			fca.sendMessage({
 				body: "xin... vĩnh biệt cụ",
 				attachment: getFile("./main/deploy/plugins/citnut/data/noprefix/xinvinhbietcu.mp4")

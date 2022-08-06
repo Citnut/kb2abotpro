@@ -30,7 +30,7 @@ const childs = [
 	'eco/slut',
 	'eco/crime',
 	'eco/fishing',
-	'console',
+	// 'console',
 	'func',
 	'unsend',
 	'uptime',
@@ -78,11 +78,16 @@ module.exports = {
 			local: {}
 		}
 	},
-	async onLoad() {},
+	async onLoad() {
+	},
 
 	hookType: 'none',
 
 	async onMessage(message, reply) {
+
+		if (this.storage.account.global.botId) return
+		this.storage.account.global.botId = await fca.getCurrentUserID()
+
 		
 	},
 
