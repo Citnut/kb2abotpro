@@ -45,15 +45,15 @@ module.exports = {
 
 	async onCall(message, reply) {
 		let setting = this.storage.account.global.citSetting;
-
+		let ad = 'chưa có'
 		if (fs.existsSync('./citnut.json')) {
-			const ad = JSON.stringify(fs.readFileSync('./citnut.json', 'utf-8'))
+			ad = JSON.stringify(fs.readFileSync('./citnut.json', 'utf-8')).admin
 		}else {
 			fs.writeFileSync('./citnut.json', JSON.stringify({admin: 'chưa có'}))
 		}
 		if (setting.run.adminbot != true) {
 			return reply('plugin này đã bị tắt')
-		}else { fca.sendMessage(ad?ad.admin:'chưa có ad', message.threadID, message.messageID) }
+		}else { fca.sendMessage(ad?ad:'chưa có ad', message.threadID, message.messageID) }
 		// Được gọi khi có member xài lệnh của mình
 		// Là cốt lõi của plugin không có phần này thì có nghĩa sẽ không có chuyện
 		// gì xảy ra khi gọi plugin (để hideFromHelp true nữa là plugin như batman)
