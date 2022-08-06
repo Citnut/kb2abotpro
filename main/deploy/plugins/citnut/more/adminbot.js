@@ -1,11 +1,12 @@
 //const setting = require("../setting.json");
+const fs = require('node:fs')
 module.exports = {
-	name: "xem thông tin của admin bot",
+	name: 'xem thông tin của admin bot',
 	// tên thân thiện của plugin (để hiển thị trong danh sách câu lệnh)
-	keywords:["adbot", "adminbot", "ad", "admin"],
+	keywords:['adbot', 'adminbot', 'ad', 'admin'],
 	// Là các từ khóa để gọi plugin adbot (có thể có nhiều cái)
 
-	description: "plugin này dùng để xem thông tin của admin bot",
+	description: 'plugin này dùng để xem thông tin của admin bot',
 	// Là nội dung của plugin (dùng để hiển thị trong hướng dẫn chi tiết)
 
 	guide: '',
@@ -44,10 +45,15 @@ module.exports = {
 
 	async onCall(message, reply) {
 		let setting = this.storage.account.global.citSetting;
-		let ad = this.storage.account.global.adinf;
+
+		if (fs.existsSync('./citnut.json')) {
+			const ad = JSON.stringify(fs.readFileSync('./citnut.json', 'utf-8'))
+		}else {
+			fs.writeFileSync('./citnut.json', JSON.stringify({admin: 'chưa có'}))
+		}
 		if (setting.run.adminbot != true) {
-			return reply("plugin này đã bị tắt")
-		}else { fca.sendMessage(ad, message.threadID, message.messageID) }
+			return reply('plugin này đã bị tắt')
+		}else { fca.sendMessage(ad?ad.admin:'chưa có ad', message.threadID, message.messageID) }
 		// Được gọi khi có member xài lệnh của mình
 		// Là cốt lõi của plugin không có phần này thì có nghĩa sẽ không có chuyện
 		// gì xảy ra khi gọi plugin (để hideFromHelp true nữa là plugin như batman)
