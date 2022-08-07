@@ -15,7 +15,7 @@ const childs = [
 	'vid/muaquatpro',
 	'vid/hacker',
 	'more/tinhtam',
-	'more/adminbot',
+	//'more/adminbot',
 	'more/adduser',
 	'more/cadao',
 	'more/uid',
