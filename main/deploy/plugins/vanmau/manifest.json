@@ -7,7 +7,7 @@
     "contact": "fb.com/duongdzin"
   },
   "entry": "index.js",
-  "disable": false,
+  "disable": true,
   "update": {
     "manifest": "",
     "plugin": ""
