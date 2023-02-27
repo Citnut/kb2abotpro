@@ -7,7 +7,7 @@
     "contact": "fb.com/nguyen.thanh.chinhs"
   },
   "entry": "index.js",
-  "disable": false,
+  "disable": true,
   "update": {
     "manifest": "",
     "plugin": ""
