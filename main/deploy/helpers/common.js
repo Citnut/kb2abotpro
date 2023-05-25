@@ -6,10 +6,10 @@
  * <code>const {asyncWait, round, extend} = kb2abot.helpers;</code>
  * @module COMMON
  */
-const fs = require('fs')
-const axios = require('axios')
-const minimist = require('minimist')
-const childProcess = require('child_process')
+import {unlinkSync, statSync, createReadStream, createWriteStream} from "node:fs"
+import axios from "axios"
+import minimist from "minimist"
+import * as ChildProcess from "node:child_process"
 /**
  * Hàm dừng chương trình async
  * @async
@@ -38,7 +38,7 @@ const asyncWait = async (time) => {
  */
 const execShellCommand = (cmd) => {
     return new Promise((resolve) => {
-        childProcess.exec(cmd, (error, stdout, stderr) =>
+        ChildProcess.exec(cmd, (error, stdout, stderr) =>
             resolve(stdout ? stdout : stderr)
         )
     })
@@ -200,7 +200,7 @@ const parseJSON = (text) => {
 const deleteFile = (path) => {
     return new Promise((resolve, reject) => {
         try {
-            fs.unlinkSync(path)
+            unlinkSync(path)
             resolve()
         } catch (e) {
             reject(e)
@@ -230,7 +230,7 @@ const getKeyword = (text) => {
  * // 1
  */
 const getFileSize = (path) => {
-    let fileSizeInBytes = fs.statSync(path)['size']
+    let fileSizeInBytes = statSync(path)['size']
     //Convert the file size to megabytes (optional)
     let fileSizeInMegabytes = fileSizeInBytes / 1000000.0
     return Math.round(fileSizeInMegabytes)
@@ -348,7 +348,7 @@ const validURL = (str) => {
     return !!pattern.test(str)
 }
 const downloadFile = async (fileUrl, outputLocationPath) => {
-    const writer = fs.createWriteStream(outputLocationPath)
+    const writer = createWriteStream(outputLocationPath)
     const response = await axios({
         method: 'get',
         url: fileUrl,
@@ -370,9 +370,9 @@ const downloadFile = async (fileUrl, outputLocationPath) => {
     })
 }
 const getFile = (filePath) => {
-    return fs.createReadStream(filePath)
+    return createReadStream(filePath)
 }
-module.exports = {
+export {
     round,
     extend,
     subname,

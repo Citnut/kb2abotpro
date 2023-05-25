@@ -15,7 +15,7 @@ const childs = [
     'version',
     'weather',
 ]
-module.exports = {
+export default {
     keywords: ['internal'],
     name: 'Internal commands',
     description: 'Official internal commands',

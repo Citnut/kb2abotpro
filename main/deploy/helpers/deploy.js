@@ -2,9 +2,9 @@
  * Các function cần thiết dùng để khởi động kb2abot cho 1 tài khoản
  * @module DEPLOY
  */
-const fs = require('fs')
-const path = require('path')
-const login = require('facebook-chat-api')
+import { readdir, unlink } from 'node:fs'
+import path from 'node:path'
+import login from "facebook-chat-api"
 /**
  * Hàm tạo appState từ ATP cookie
  * @param  {String} atp ATP cookie (text)
@@ -55,11 +55,11 @@ const getCookieType = (text) => {
  * Xóa hết tất cả file trong folder /musics
  */
 const truncateMusics = () => {
-    fs.readdir('musics', (err, files) => {
+    readdir('musics', (err, files) => {
         // delete all music files before start
         if (err) throw err
         for (const file of files)
-            fs.unlink(path.join('musics', file), (error) => {
+            unlink(path.join('musics', file), (error) => {
                 if (error) throw error
             })
     })
@@ -112,7 +112,7 @@ const convertJ2teamToAppstate = (j2team) => {
         })
     return unofficialAppState
 }
-module.exports = {
+export {
     getCookieType,
     truncateMusics,
     checkCredential,

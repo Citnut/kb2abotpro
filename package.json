@@ -3,6 +3,7 @@
     "version": "2.0.9",
     "description": "Bot that connected to Facebook Messenger help you to manage members, entertain in any groups!",
     "main": "main/index.js",
+    "type": "module",
     "scripts": {
         "dev": "node --trace-warnings main/deploy --cookiePath bot.json",
         "start": "node main",
@@ -29,11 +30,11 @@
         "decache": "^4.6.0",
         "deep-extend": "^0.6.0",
         "detective": "^5.2.0",
-        "facebook-chat-api": "github:kb2ateam/facebook-chat-api",
+        "facebook-chat-api": "github:ntkhang03/fb-chat-api",
         "fast-safe-stringify": "^2.1.1",
         "folder-hash": "^4.0.1",
         "is-running": "^2.1.0",
-        "jimp": "^0.16.1",
+        "jimp": "^0.22.8",
         "log-to-file": "^3.0.0",
         "minimist": "^1.2.5",
         "moment-timezone": "^0.5.34",
@@ -42,59 +43,12 @@
         "ora": "^5.4.1",
         "pidusage": "^3.0.0",
         "recursive-readdir": "^2.2.2",
-        "simple-git": "^2.48.0",
+        "simple-git": "^3.18.0",
         "socket.io-client": "^4.4.0",
         "stream-buffers": "^3.0.2",
         "string-similarity": "^4.0.4",
         "tiktok-scraper": "^1.4.36",
         "uniqid": "^5.4.0"
-    },
-    "devDependencies": {
-        "eslint": "^8.3.0",
-        "eslint-config-prettier": "^8.3.0",
-        "prettier": "^2.5.0"
-    },
-    "eslintConfig": {
-        "env": {
-            "commonjs": true,
-            "es2021": true,
-            "node": true
-        },
-        "extends": [
-            "eslint:recommended",
-            "prettier"
-        ],
-        "parserOptions": {
-            "ecmaVersion": 12
-        },
-        "rules": {
-            "indent": [
-                "error",
-                "tab"
-            ],
-            "linebreak-style": [
-                "error",
-                "unix"
-            ],
-            "quotes": [
-                "error",
-                "single"
-            ]
-        },
-        "globals": {
-            "kb2abot": "writable",
-            "loader": "readable",
-            "fca": "readable"
-        }
-    },
-    "prettier": {
-        "semi": false,
-        "singleQuote": true,
-        "jsxSingleQuote": true,
-        "tabWidth": 4,
-        "useTabs": false,
-        "trailingComma": "es5",
-        "bracketSpacing": true
     },
     "engines": {
         "node": ">=14"

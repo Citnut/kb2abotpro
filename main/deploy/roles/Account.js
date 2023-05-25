@@ -1,8 +1,8 @@
-const fs = require('fs')
-const path = require('path')
-const safeStringify = require('fast-safe-stringify')
-const Thread = require('./Thread')
-module.exports = class Account extends kb2abot.helpers.Manager {
+import { readFileSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
+import * as safeStringify from "fast-safe-stringify"
+import Thread from './Thread.js'
+export default class Account extends kb2abot.helpers.Manager {
     constructor({ id } = {}) {
         super()
         this.id = id
@@ -23,7 +23,7 @@ module.exports = class Account extends kb2abot.helpers.Manager {
     }
     load() {
         try {
-            const text = fs.readFileSync(this.storagePath())
+            const text = readFileSync(this.storagePath())
             const accountStorage = JSON.parse(text)
             for (const threadStorage of accountStorage.__threads__) {
                 const thread = this.addThread(
@@ -56,7 +56,7 @@ module.exports = class Account extends kb2abot.helpers.Manager {
                 (key, value) => (value === '[Circular]' ? undefined : value),
                 kb2abot.config.PRETTY_DATASTORE ? '\t' : ''
             )
-            fs.writeFileSync(this.storagePath(), save)
+            writeFileSync(this.storagePath(), save)
         } catch (e) {
             console.newLogger.error(e.message)
         }

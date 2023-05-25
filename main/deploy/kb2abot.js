@@ -1,5 +1,5 @@
-const stringSimilarity = require('string-similarity')
-const path = require('path')
+import stringSimilarity from "string-similarity"
+import path from "node:path"
 try {
     kb2abot.account.load()
     console.newLogger.success(`Loaded datastore ${kb2abot.id}.json!`)
@@ -205,7 +205,7 @@ const fn = async function (err, message) {
             })
     }
 }
-module.exports = async (fca) => {
+export default async (fca) => {
     globalThis.fca = fca // fca will become global
     for (const command of kb2abot.pluginManager.getAllCommands()) {
         try {

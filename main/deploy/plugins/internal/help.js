@@ -10,7 +10,7 @@ const genHelp = (prefix, found) => {
     replyMsg += `Hướng dẫn sử dụng:\n${prefix}${command.keywords[0]} ${command.guide}`
     return replyMsg
 }
-module.exports = {
+export default {
     keywords: ['help'],
     name: 'Hướng dẫn',
     description: 'Hiển thị hướng dẫn, danh sách các câu lệnh',

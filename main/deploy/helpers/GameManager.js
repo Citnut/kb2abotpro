@@ -1,5 +1,5 @@
-const Manager = require('./Manager')
-module.exports = class GameManager extends Manager {
+import Manager from "./Manager.js"
+export default class GameManager extends Manager {
     constructor(games) {
         super()
         this.games = games

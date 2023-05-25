@@ -1,5 +1,5 @@
-const axios = require('axios')
-module.exports = async (message, reply) => {
+import axios from 'axios'
+export default async (message, reply) => {
     const res = await axios({
         url: `https://simsumi.herokuapp.com/api?text=${encodeURI(
             message.body

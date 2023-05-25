@@ -1,4 +1,4 @@
-module.exports = class Thread extends kb2abot.helpers.Manager {
+export default class Thread extends kb2abot.helpers.Manager {
     constructor({ id, owner, storage = {} } = {}) {
         super()
         this.id = id

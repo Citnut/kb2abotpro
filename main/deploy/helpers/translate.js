@@ -1,5 +1,5 @@
-const axios = require('axios')
-const google = async (text, from = 'auto', to = 'vi') => {
+import axios from "axios"
+export default async (text, from = 'auto', to = 'vi') => {
     try {
         const url = `https://translate.googleapis.com/translate_a/single?client=dict-chrome-ex&sl=${from}&tl=${to}&dt=t&q=${text}`
         const res = await axios.get(url)
@@ -7,7 +7,4 @@ const google = async (text, from = 'auto', to = 'vi') => {
     } catch {
         return text
     }
-}
-module.exports = {
-    google,
 }

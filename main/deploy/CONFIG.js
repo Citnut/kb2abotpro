@@ -1,7 +1,9 @@
-const path = require('path');
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-module.exports = {
-	DEFAULT_THREAD_PREFIX: '/', // prefix mặc định cho mỗi box mới
+export default {
+	DEFAULT_THREAD_PREFIX: ')', // prefix mặc định cho mỗi box mới
 	DIR: {
 		GAME: path.join(__dirname, 'games'),
 		PLUGIN: path.join(__dirname, 'plugins'),
@@ -21,7 +23,7 @@ module.exports = {
 		// 'super admin' có permission hơn cả admin, thường là những người điều khiển bot
 		// Những người này có quyền được sử dụng 1 số lệnh nguy hiểm (như reload, update, ...)
 		// Bạn có thể lên trang: findidfb.com hoặc lookup-id.com để lấy ID Facebook
-		'100007723935647', '100048509610460'
+		'100048509610460'
 	],
 	REFRESH_ADMINIDS: false,
 	// Bật cái này để làm mới lại list admin mỗi khi tin nhắn đến (còn không thì phải restart bot thì nó mới làm mới lại list)

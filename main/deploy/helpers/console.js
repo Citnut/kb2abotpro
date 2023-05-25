@@ -4,7 +4,7 @@
  * <code>const {Logger, initLogger} = kb2abot.utils.CONSOLE;</code>
  * @module CONSOLE
  */
-const chalk = require('chalk')
+import chalk from 'chalk'
 class Logger {
     constructor(prefixTag = 'KB2ABOT') {
         this.prefixTag = prefixTag
@@ -60,7 +60,7 @@ const setTerminalTitle = (text) => {
         `${String.fromCharCode(27)}]0;${text}${String.fromCharCode(7)}`
     )
 }
-module.exports = {
+export {
     initLogger,
     setTerminalTitle,
 }

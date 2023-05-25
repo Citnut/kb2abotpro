@@ -1,6 +1,6 @@
-const Account = require('./Account')
-const Thread = require('./Thread')
-module.exports = {
+import Account from './Account'
+import Thread from './Thread'
+export default {
     Account,
     Thread,
 }

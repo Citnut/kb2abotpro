@@ -1,9 +1,9 @@
-const axios = require('axios')
-module.exports = async (message, reply) => {
+import axios from 'axios'
+export default async (message, reply) => {
     const res = await axios({
         url: `https://api.simsimi.net/v2/?text=${encodeURI(
             message.body
-        )}&lc=vi`,
+        )}&lc=vn`,
         method: 'GET',
     })
     reply(res.data.success)

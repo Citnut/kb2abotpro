@@ -1,81 +1,76 @@
-const fs = require('fs')
-const recursive = require('recursive-readdir')
-const path = require('path')
-const axios = require('axios')
+import { existsSync, readdirSync } from 'fs'
+import recursive from 'recursive-readdir'
+import { basename, join } from 'path'
+import { get } from 'axios'
 const { validURL, downloadFile } = kb2abot.helpers
-module.exports = {
-    keywords: ['checkupdate'],
-    name: 'Cập nhật',
-    description: 'Kiểm tra cập nhật của các plugin',
-    guide: '',
-    childs: [],
-    permission: {
-        '*': 'superAdmin',
+export const keywords = ['checkupdate']
+export const name = 'Cập nhật'
+export const description = 'Kiểm tra cập nhật của các plugin'
+export const guide = ''
+export const childs = []
+export const permission = {
+    '*': 'superAdmin',
+}
+export const datastoreDesign = {
+    account: {
+        global: {},
+        local: {},
     },
-    datastoreDesign: {
-        account: {
-            global: {},
-            local: {},
-        },
-        thread: {
-            global: {},
-            local: {},
-        },
+    thread: {
+        global: {},
+        local: {},
     },
-    async onLoad() {
-        const checkupdate = async () => {
-            console.newLogger.debug('PLUGINS - Dang kiem tra update . . .')
-            const files = (await recursive(kb2abot.config.DIR.PLUGIN)).filter(
-                (file) =>
-                    path.basename(file) === 'manifest.json' &&
-                    validURL(require(file).update.manifest) &&
-                    validURL(require(file).update.plugin)
+}
+export async function onLoad() {
+    const checkupdate = async () => {
+        console.newLogger.debug('PLUGINS - Dang kiem tra update . . .')
+        const files = (await recursive(kb2abot.config.DIR.PLUGIN)).filter(
+            (file) => basename(file) === 'manifest.json' &&
+                validURL(require(file).update.manifest) &&
+                validURL(require(file).update.plugin)
+        )
+        let newVer = false
+        for (const file of files) {
+            const manifest = require(file)
+            const { data: tmp_manifest } = await get(
+                manifest.update.manifest
             )
-            let newVer = false
-            for (const file of files) {
-                const manifest = require(file)
-                const { data: tmp_manifest } = await axios.get(
-                    manifest.update.manifest
+            const outputFileName = `${manifest.name} ${tmp_manifest.version}.zip`
+            const output = join(
+                kb2abot.config.DIR.UPDATE,
+                outputFileName
+            )
+            if (!existsSync(output) &&
+                manifest.version !== tmp_manifest.version) {
+                newVer = true
+                console.newLogger.warn(
+                    `PLUGINS - Phat hien phien ban moi, dang tai ${manifest.name} [${tmp_manifest.version}]!`
                 )
-                const outputFileName = `${manifest.name} ${tmp_manifest.version}.zip`
-                const output = path.join(
-                    kb2abot.config.DIR.UPDATE,
-                    outputFileName
-                )
-                if (
-                    !fs.existsSync(output) &&
-                    manifest.version !== tmp_manifest.version
-                ) {
-                    newVer = true
-                    console.newLogger.warn(
-                        `PLUGINS - Phat hien phien ban moi, dang tai ${manifest.name} [${tmp_manifest.version}]!`
-                    )
-                    await downloadFile(manifest.update.plugin, output)
-                    console.newLogger.debug(
-                        `PLUGINS - Da tai ${manifest.name} [${tmp_manifest.version}] tai ${output}!`
-                    )
-                }
-            }
-            if (!newVer) {
+                await downloadFile(manifest.update.plugin, output)
                 console.newLogger.debug(
-                    'PLUGINS - khong tim thay phien ban moi!'
+                    `PLUGINS - Da tai ${manifest.name} [${tmp_manifest.version}] tai ${output}!`
                 )
             }
         }
-        setInterval(() => checkupdate(), kb2abot.config.INTERVAL.CHECK_UPDATE)
-        await checkupdate()
-    },
-    hookType: 'none',
-    async onMessage(message, reply) {},
-    async onCall(message, reply) {
-        const files = fs
-            .readdirSync(kb2abot.config.DIR.UPDATE)
-            .filter((filename) => filename.split('.').pop() === 'zip')
-        if (files.length > 0)
-            reply(
-                'Đường dẫn file updates: /main/deploy/updates\nVui lòng tự update (có thể move, delete hoặc extract)\nDanh sách file updates:\n' +
-                    files.join(', ')
+        if (!newVer) {
+            console.newLogger.debug(
+                'PLUGINS - khong tim thay phien ban moi!'
             )
-        else reply('Không tìm thấy bản cập nhật nào!')
-    },
+        }
+    }
+    setInterval(() => checkupdate(), kb2abot.config.INTERVAL.CHECK_UPDATE)
+    await checkupdate()
+}
+export const hookType = 'none'
+export async function onMessage(message, reply) { }
+export async function onCall(message, reply) {
+    const files = readdirSync(kb2abot.config.DIR.UPDATE)
+        .filter((filename) => filename.split('.').pop() === 'zip')
+    if (files.length > 0)
+        reply(
+            'Đường dẫn file updates: /main/deploy/updates\nVui lòng tự update (có thể move, delete hoặc extract)\nDanh sách file updates:\n' +
+            files.join(', ')
+        )
+    else
+        reply('Không tìm thấy bản cập nhật nào!')
 }

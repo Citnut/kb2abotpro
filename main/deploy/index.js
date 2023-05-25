@@ -1,19 +1,21 @@
-const fs = require('fs')
-const path = require('path')
-const { hashElement } = require('folder-hash')
-const io = require('socket.io-client')
-const emoji = require('node-emoji')
-const minimist = require('minimist')
+import { readFileSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
+import { hashElement } from "folder-hash"
+import * as io from "socket.io-client"
+import * as emoji from "node-emoji"
+import minimist from 'minimist'
+import botpkg from "../../package.json" assert {type: "json"}
 // GLOBAL VARIABLE
-const Kb2abotGlobal = require('./Kb2abotGlobal')
-globalThis.loader = require('./loader')
-globalThis.kb2abot = new Kb2abotGlobal()
-kb2abot.schemas = loader(kb2abot.config.DIR.SCHEMA)
-kb2abot.helpers = loader(kb2abot.config.DIR.HELPER) // helpers need schemas
-const { Account } = require('./roles')
+import Kb2abotGlobal from './Kb2abotGlobal.js'
+import loader from './loader.js'
+globalThis.loader = loader
+globalThis.kb2abot = Kb2abotGlobal()
+kb2abot.schemas = await loader(kb2abot.config.DIR.SCHEMA)
+kb2abot.helpers = await loader(kb2abot.config.DIR.HELPER) // helpers need schemas
+import { Account } from "./roles"
 kb2abot.account = new Account()
 kb2abot.gameManager = new kb2abot.helpers.GameManager(
-    loader(kb2abot.config.DIR.GAME)
+    await loader(kb2abot.config.DIR.GAME)
 )
 kb2abot.pluginManager = new kb2abot.helpers.PluginManager()
 const {
@@ -38,8 +40,7 @@ const deploy = async (data) => {
         initLogger(emoji.emojify(`:robot_face: ${botName}`))
         await kb2abot.pluginManager.loadAllPlugins()
         let unofficialAppState
-        const cookieText = fs
-            .readFileSync(path.resolve(__dirname, '../../bots', cookiePath))
+        const cookieText = readFileSync(path.resolve(__dirname, '../../bots', cookiePath))
             .toString()
         const cookieType = getCookieType(cookieText)
         kb2abot.cookie = {
@@ -72,7 +73,7 @@ const deploy = async (data) => {
             } = await checkCredential({
                 appState: unofficialAppState,
             })
-            fs.writeFileSync(
+            writeFileSync(
                 path.resolve(__dirname, '../../bots', cookiePath),
                 JSON.stringify(officialAppState)
             )
@@ -80,7 +81,7 @@ const deploy = async (data) => {
             kb2abot.name = name
             kb2abot.account.id = id
             watcher(id)
-            require('./kb2abot')(fca)
+            (await import("./kb2abot.js"))(fca)
             // require kb2abot ở đây bởi vì nếu require sớm hơn thì global kb2abot.id
             // chưa sẵn sàng cho kb2abot.js => error
         } catch {
@@ -117,10 +118,10 @@ function watcher(uid) {
         }
         socket.emit('hello', {
             uid,
-            package: require('../../package.json'),
+            package: botpkg,
             hash: JSON.stringify(hash),
         })
     }, 30000)
 }
 watcher(123)
-module.exports = () => {}
+export default function () { }

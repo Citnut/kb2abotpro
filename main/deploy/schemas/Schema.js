@@ -1,5 +1,5 @@
-const uniqid = require('uniqid')
-module.exports = class Schema {
+import uniqid from 'uniqid'
+export default class Schema {
     constructor() {
         this.id = uniqid()
         this.createAt = Date.now()

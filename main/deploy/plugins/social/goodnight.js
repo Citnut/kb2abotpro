@@ -1,4 +1,5 @@
-const fs = require('fs');
+import * as fs from "node:fs"
+
 const path = require('path');
 const uniqid = require('uniqid');
 const merge = require('merge-images');

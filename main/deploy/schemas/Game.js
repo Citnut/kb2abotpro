@@ -1,5 +1,5 @@
-const Schema = require('./Schema')
-module.exports = class Game extends Schema {
+import Schema from './Schema.js'
+export default class Game extends Schema {
     constructor(options) {
         super(options)
         const {

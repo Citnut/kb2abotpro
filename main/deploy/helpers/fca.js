@@ -1,5 +1,4 @@
-const axios = require('axios')
-const fetch = require('node-fetch')
+import fetch from 'node-fetch'
 const getUsername = (fblink) => {
     try {
         return /id=(.*?)$/.exec(fblink)[1]
@@ -83,7 +82,7 @@ const getToken = async () => {
     const second = /"],\["(.*?)","/.exec(first)[1]
     return second
 }
-module.exports = {
+export {
     getUsername,
     sendMessage,
     getThreadInfo,

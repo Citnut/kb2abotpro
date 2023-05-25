@@ -1,6 +1,5 @@
 const _setting = require("./setting.json");
 const axios = require("axios");
-const fs = require("fs");
 const { getParam } = kb2abot.helpers;
 const citnut = {
 	"trungthu": "september 10, 2022 00:00:00",
@@ -126,7 +125,7 @@ module.exports = {
 
 
 		async function menu() {
-			let noprefix, repMsg = "";
+			let noprefix = "";
 			let on = [];
 			let off = [];
 			let obj = setting.run;

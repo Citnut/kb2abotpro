@@ -8,7 +8,8 @@ main/deploy/games/*
 !main/deploy/games/README.md
 main/deploy/updates/*
 !main/deploy/updates/README.md
+main/deploy/CONFIG.js
 node_modules/
+package-lock.json
 packagehash.txt
 test.js
-!main/deploy/CONFIG.js

@@ -1,4 +1,4 @@
-module.exports = class Manager {
+export default class Manager {
     constructor(items = []) {
         this.items = items
     }

@@ -1,6 +1,6 @@
-const { getParam, getInstructor } = kb2abot.helpers
+const { getInstructor } = kb2abot.helpers
 const childs = ['reload', 'reloadgame']
-module.exports = {
+export default {
     keywords: ['plugman'],
     name: 'Quản lí plugin/game',
     description: 'Công cụ quản lí plugins hoặc games',

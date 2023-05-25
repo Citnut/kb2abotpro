@@ -1,19 +1,24 @@
-const fs = require('fs');
-const path = require('path');
-const {subname} = require('./helpers/common');
+import {readdirSync, lstatSync} from "node:fs"
+import path from "node:path"
+import { subname } from "./helpers/common.js"
 
-module.exports = dir => {
-    const exportData = {};
-    const files = fs
-        .readdirSync(dir)
+async function gameLoader (dir) {
+    let exportData = {}
+    
+}
+
+export default async (dir) => {
+    let exportData = {};
+    const files = readdirSync(dir)
         .filter(
             filename =>
-                fs.lstatSync(path.join(dir, filename)).isDirectory() ||
+                lstatSync(path.join(dir, filename)).isDirectory() ||
                 filename.split('.').pop() == 'js'
         );
     for (const filename of files) {
         try {
-            const data = require(path.join(dir, filename));
+            let data = await import(path.join(dir, filename));
+            if (data.default) data = data.default
             const sname = subname(filename) || filename;
             if (sname == 'common') {
                 Object.assign(exportData, data);

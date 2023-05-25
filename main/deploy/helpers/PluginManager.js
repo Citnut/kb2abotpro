@@ -1,12 +1,13 @@
-const axios = require('axios')
-const recursive = require('recursive-readdir')
-const fs = require('fs')
-const path = require('path')
-const log = require('log-to-file')
-const detective = require('detective')
-const { execShellCommand } = require('./common')
-const Manager = require('./Manager')
-module.exports = class PluginManager extends Manager {
+import axios from "axios"
+import recursive from "recursive-readdir"
+import { readFileSync } from "node:fs"
+import path from "node:path"
+import log from "log-to-file"
+import detective from "detective"
+import { execShellCommand } from "./common.js"
+import Manager from "./Manager.js"
+import { createRequire } from "node:module"
+export default class PluginManager extends Manager {
     constructor() {
         super()
         this.log = ''
@@ -56,7 +57,7 @@ module.exports = class PluginManager extends Manager {
             (file) => path.basename(file) === 'manifest.json'
         )
         for (const file of files) {
-            const cfg = require(file)
+            const cfg = await import(file)
             if (cfg.disable) {
                 !silent &&
                     console.newLogger.warn(`PLUGINS - DISABLED: ${cfg.name}`)
@@ -93,7 +94,7 @@ module.exports = class PluginManager extends Manager {
         }
         do {
             try {
-                require(cmdPath)
+                await import(cmdPath)
                 checker.is_MODULE_NOT_FOUND = false
             } catch (e) {
                 if (e.code === 'MODULE_NOT_FOUND') {
@@ -101,7 +102,7 @@ module.exports = class PluginManager extends Manager {
                         throw new Error(
                             `Required child file not found (${cmdPath})`
                         )
-                    const filePath = fs.readFileSync(e.requireStack[0])
+                    const filePath = readFileSync(e.requireStack[0])
                     const originalModules = detective(filePath)
                     const filteredModules = originalModules.filter(
                         (requirement, index) =>
@@ -109,7 +110,7 @@ module.exports = class PluginManager extends Manager {
                             originalModules.indexOf(requirement) === index && // remove dupplicate
                             (() => {
                                 try {
-                                    require(requirement)
+                                    createRequire(import.meta.url)(requirement)
                                     return false
                                 } catch {
                                     return true
@@ -196,12 +197,12 @@ module.exports = class PluginManager extends Manager {
                     path: cmdPath,
                 },
             },
-            ...require(cmdPath),
+            ...await import(cmdPath),
         }
         for (const childCmdPath of newCmd.childs)
             newCmd._.childs.push(
                 await this.loadCommand(
-                    path.resolve(require.resolve(cmdPath), '..', childCmdPath)
+                    path.resolve(createRequire(import.meta.url).resolve(cmdPath), '..', childCmdPath)
                 )
             )
         return newCmd

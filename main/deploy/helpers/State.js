@@ -1,5 +1,5 @@
-const Manager = require('./Manager')
-module.exports = class State extends Manager {
+import Manager from "./Manager.js"
+export default class State extends Manager {
     constructor(options) {
         super(options)
         this.index = 0
